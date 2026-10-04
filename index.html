@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dalal 💕</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg1:#2a0a1f;--bg2:#5c1241;--rose:#ff5d8f;--cream:#fff1f5;--gold:#ffd27a}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:radial-gradient(circle at 50% 20%,var(--bg2),var(--bg1));color:var(--cream);font-family:'Baloo 2',system-ui,sans-serif;display:flex;justify-content:center;overflow-x:hidden}
+#hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.fh{position:absolute;bottom:-40px;animation:up linear forwards;opacity:.5}
+@keyframes up{to{transform:translateY(-110vh) rotate(30deg);opacity:0}}
+main{position:relative;z-index:1;width:100%;max-width:640px;padding:24px 18px 40px;text-align:center;display:flex;flex-direction:column;justify-content:center;min-height:100%}
+h1{font-size:2.2rem;margin:0 0 4px;font-weight:800}
+.lvl{opacity:.8;margin-bottom:20px}
+.bar{display:flex;gap:8px;justify-content:center;margin-bottom:26px}
+.bar i{width:34px;height:8px;border-radius:8px;background:#ffffff30}
+.bar i.on{background:var(--rose)}
+#phrase{display:flex;flex-wrap:wrap;gap:10px 16px;justify-content:center;font-size:clamp(2rem,9vw,3.2rem);font-weight:800;line-height:1.1;min-height:140px;align-content:center}
+.w{position:relative;display:inline-flex}
+.rest{position:relative;display:inline-block}
+.rest b{font-weight:800;opacity:0;transition:opacity .6s .35s}
+.hen{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:1.15em;line-height:1;transition:transform .9s cubic-bezier(.5,-.4,.7,1),opacity .9s}
+.hen.idle{animation:wob 2.2s ease-in-out infinite}
+@keyframes wob{50%{transform:translate(-50%,-56%) rotate(6deg)}}
+.w.done .rest b{opacity:1}
+.w.done .hen{animation:none;transform:translate(160px,-50%) rotate(25deg);opacity:0}
+.w.done .f{color:var(--gold)}
+.row{display:flex;gap:10px;margin-top:30px}
+input{flex:1;min-width:0;font:inherit;font-size:1.2rem;padding:14px 18px;border-radius:40px;border:2px solid #ffffff40;background:#ffffff14;color:#fff;outline:none}
+input:focus{border-color:var(--rose)}
+button{font:inherit;font-weight:800;font-size:1.1rem;border:0;border-radius:40px;padding:14px 24px;background:var(--rose);color:#fff;cursor:pointer}
+button:active{transform:scale(.96)}
+#msg{min-height:34px;margin-top:16px;font-size:1.15rem;color:var(--gold)}
+.shake{animation:sh .4s}
+.pop{animation:pop .7s cubic-bezier(.2,1.6,.4,1)}
+@keyframes pop{0%{transform:scale(.3) rotate(-8deg);opacity:0}60%{transform:scale(1.25) rotate(3deg);opacity:1}100%{transform:scale(1)}}
+.spin{animation:spin .8s ease-out}
+@keyframes spin{0%{transform:rotate(-360deg) scale(.2);opacity:0}100%{transform:none;opacity:1}}
+.bounce{animation:bnc .9s}
+@keyframes bnc{0%{transform:translateY(-60px);opacity:0}30%{transform:translateY(0);opacity:1}50%{transform:translateY(-24px)}70%{transform:translateY(0)}85%{transform:translateY(-8px)}100%{transform:none}}
+.slide{animation:sld .7s cubic-bezier(.2,1.4,.4,1)}
+@keyframes sld{0%{transform:translateX(120%) skewX(-20deg);opacity:0}100%{transform:none;opacity:1}}
+.jelly{animation:jel .9s}
+@keyframes jel{0%{transform:scale(0)}30%{transform:scale(1.3,.7)}50%{transform:scale(.8,1.25)}70%{transform:scale(1.1,.9)}100%{transform:scale(1)}}
+.sp{position:fixed;z-index:6;pointer-events:none;font-size:22px;animation:fly 1s ease-out forwards}
+@keyframes fly{to{transform:translate(var(--dx),var(--dy)) scale(.3) rotate(200deg);opacity:0}}
+.hint{color:#fff;direction:ltr;letter-spacing:.12em}
+@keyframes sh{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+#modal,#final{position:fixed;inset:0;z-index:5;display:none;align-items:center;justify-content:center;background:#1a0613ee;padding:20px}
+#modal.show,#final.show{display:flex}
+.card{background:linear-gradient(160deg,#7a1c58,#3d0d2c);border:2px solid var(--rose);border-radius:28px;padding:30px 24px;max-width:480px;width:100%;box-shadow:0 0 60px #ff5d8f55}
+.card p{font-size:1.35rem;margin:10px 0 24px}
+.card .big{font-size:3rem}
+#final{align-items:flex-start;overflow-y:auto}
+#letter{max-width:560px;margin:auto;padding:20px 8px 60px;direction:rtl;font-family:'Amiri',serif;font-size:1.35rem;line-height:2.1;text-align:right}
+#letter h2{font-size:2rem;text-align:center;color:var(--gold);margin:10px 0 20px}
+#letter p{margin:0 0 16px;opacity:0;transform:translateY(10px);transition:all .9s}
+#letter p.in{opacity:1;transform:none}
+#letter .poem{text-align:center;color:var(--gold);font-weight:700;border-block:1px solid #ffd27a55;padding:12px 0}
+#letter .sig{text-align:center;font-size:1.6rem}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01s!important}}
+</style>
+</head>
+<body>
+<div id="hearts"></div>
+<main>
+  <h1>Dalal 💕</h1>
+  <div class="lvl" id="lvl">Level 1 / 4</div>
+  <div class="bar" id="bar"></div>
+  <div id="phrase"></div>
+  <div class="row">
+    <input id="in" placeholder="ktb l-kelma hna..." autocomplete="off" autocapitalize="none" spellcheck="false">
+    <button id="go">OK</button>
+  </div>
+  <div id="msg"></div>
+</main>
+
+<div id="modal"><div class="card"><div class="big">🎉</div><p id="bravo"></p><button id="next">Kml ➜</button></div></div>
+
+<div id="final"><div id="letter">
+<h2>إلى دلالي 💕</h2>
+<p>دلال آيت إبراهيم، حبيبتي، يا نور حياتي. كنت كنقول مع راسي بلي "كنبغيك" كلمة كبيرة، حتى عرفتك، وفهمت بلي هي صغيرة بزاف على اللي كنحس بيه معاك.</p>
+<p class="poem">يا دلالُ يا حكايةً كتبها القدرُ لي<br>أنتِ الأمانُ وأنتِ الدارُ وأنتِ كلُّ أملي<br>إن غبتِ عني ضاقت الدنيا وإن جئتِ ابتسمتْ<br>وكأنَّ الشمسَ من عينيكِ في دربي أشرقتْ</p>
+<p>كتسوليني ديما واش غير نتي اللي كاينة؟ وها الجواب: نتي هي الوحيدة، نتي اللي عندي، ومكاينش حد قبلك ولا بعدك. ولاّ شفتي يا قلبي، مرة مرة غادي نعاودها ليك حتى تبقاي متأكدة.</p>
+<p>وراني متحمس بزاف للنهار اللي غادي تجي فيه لمكناس، ونكونو قراب شوية لبعضنا، ونعيشو الحب.</p>
+<p>وعدي ليك، يا دلال، بلي غادي نتزوجك قريب إن شاء الله، وغادي نبني معاك دار فيها الحب والأمان والضحك. وحتى إلى تغلطي، وحتى إلى ضاقت بيك الدنيا، غادي نكون معاك، ما غادي نخليك أبدا.</p>
+<p>شكرا ليك لأنك كنتي، ولأنك بقيتي، ولأنك علمتيني معنى الحب الصافي. نتي هيا "موت ولادي"، ونتي هيا العمر كامل.</p>
+<p class="sig">كنبغيك بزاف 💖<br>أيوب</p>
+</div></div>
+
+<script>
+const LEVELS=[
+ {words:["kanbghik","bzaaf","3omri"],bravo:"hbiba ana fakhor bik o kanbghik o kantsta elik ndozo level 2 💕"},
+ {words:["nti","noor","hyati"],bravo:"had zin kolo yarbi 3atihli chokran ya allah ela had gift 🙏"},
+ {words:["kanbghik","9ed","luniverse"],bravo:"olahila proud o kanchkr rbi again and again endi madamti smitha dalal ait brahim 🥹"},
+ {words:["nti","huya","mot","wladi"],bravo:"ach angolk nti huya met waladiiiii salinaaa 😭💖"}
+];
+const WRONG=["9rbti bebey gha 3awdi 🥺","ana m3ak bebe wakha tghlti 💕","b7ala ghlti bzaff la bebe hh 😂","wa bebe lah yhdik rah bayna 😅","hbiba look ayoub kaybghik wakha tghlti ❤️","hbiba sf yalah hadi khsek tjibiha 💪","hbiba 7awli 7awli ana m3ak 🌹"];
+const $=id=>document.getElementById(id);
+const norm=s=>s.toLowerCase().replace(/[^a-z0-9]/g,"").replace(/(.)\1+/g,"$1");
+let L=0,wi=0;
+
+function build(){
+  const lv=LEVELS[L];
+  $("lvl").textContent="Level "+(L+1)+" / 4";
+  $("bar").innerHTML=LEVELS.map((_,i)=>'<i class="'+(i<=L?'on':'')+'"></i>').join("");
+  $("phrase").innerHTML=lv.words.map(w=>'<span class="w"><span class="f">'+w[0]+'</span><span class="rest"><b>'+w.slice(1)+'</b><span class="hen idle">🐔</span></span></span>').join("");
+  $("msg").textContent="";$("msg").className="";wrong=0;revs={};$("in").value="";$("in").focus();
+}
+const PRAISE=["wili wili hbiba 3ajbani bjhd 🔥","had queeny hadi ch7al mhyba 👑","flosa dyali adi 🐔💨","ari ari dak rass nboso odok ydidat 😘","sm7ili wlkn rak katsdmini fik lovey 😳","dkuya had lovey tbarklah 🧠💕","rbi 3tani w7da dkuya o zwina chkon bhalii 🥹","wa hbi rak mhyba bzaff n9si chwa 😎"];
+const ANIMS=["pop","spin","bounce","slide","jelly"];
+let wrong=0,revs={},lastP=-1;
+const order=n=>{const o=[];let a=1,b=n-1;while(a<=b){o.push(a++);if(a<=b)o.push(b--)}return o};
+function hintText(k,add){
+  const w=LEVELS[L].words[k],o=order(w.length);
+  revs[k]=Math.min(o.length,(revs[k]||0)+add);
+  const show=new Set(o.slice(0,revs[k]));
+  return [...w].map((c,i)=>i==0||show.has(i)?c:"_").join(" ");
+}
+function sparkle(el){
+  const r=el.getBoundingClientRect();
+  for(let i=0;i<10;i++){
+    const s=document.createElement("div");s.className="sp";
+    s.textContent=["✨","💖","⭐","🌸","💋","🔥"][i%6];
+    s.style.left=r.left+r.width/2+"px";s.style.top=r.top+r.height/2+"px";
+    const g=Math.PI*2*i/10;
+    s.style.setProperty("--dx",Math.cos(g)*110+"px");s.style.setProperty("--dy",Math.sin(g)*110+"px");
+    document.body.appendChild(s);setTimeout(()=>s.remove(),1000);
+  }
+}
+function check(){
+  const v=norm($("in").value);if(!v)return;
+  const lv=LEVELS[L],els=[...document.querySelectorAll(".w")];
+  const i=lv.words.findIndex((w,k)=>!els[k].classList.contains("done")&&norm(w)===v);
+  const m=$("msg");m.classList.remove("pop","hint",...ANIMS);
+  if(i<0){
+    wrong++;
+    const t=lv.words.findIndex((w,k)=>!els[k].classList.contains("done"));
+    if(wrong===3)m.textContent="💡 "+hintText(t,2);
+    else if(wrong===5)m.textContent="💡 "+hintText(t,2);
+    else if(wrong>5)m.textContent="💡 "+hintText(t,3);
+    else m.textContent=WRONG[wi++%WRONG.length];
+    if(wrong>=3&&wrong!==4)m.classList.add("hint");
+    $("in").classList.remove("shake");void $("in").offsetWidth;$("in").classList.add("shake");
+    return;
+  }
+  wrong=0;
+  els[i].classList.add("done");sparkle(els[i]);
+  $("in").value="";
+  let p;do{p=Math.random()*PRAISE.length|0}while(p===lastP);lastP=p;
+  m.textContent=PRAISE[p];void m.offsetWidth;m.classList.add(ANIMS[Math.random()*ANIMS.length|0]);
+  if(els.every(e=>e.classList.contains("done")))setTimeout(()=>{
+    $("bravo").textContent=lv.bravo;$("modal").classList.add("show");burst();
+  },1400);
+}
+$("go").onclick=check;
+$("in").addEventListener("keydown",e=>{if(e.key==="Enter")check()});
+$("next").onclick=()=>{
+  $("modal").classList.remove("show");
+  if(++L<LEVELS.length)build();else finale();
+};
+function finale(){
+  $("final").classList.add("show");burst();
+  document.querySelectorAll("#letter p").forEach((p,i)=>setTimeout(()=>p.classList.add("in"),600+i*1800));
+}
+function heart(e){
+  const h=document.createElement("div");h.className="fh";
+  h.textContent=e||["💗","💖","💕","🌹"][Math.random()*4|0];
+  h.style.left=Math.random()*100+"%";h.style.fontSize=14+Math.random()*26+"px";
+  h.style.animationDuration=6+Math.random()*6+"s";
+  $("hearts").appendChild(h);setTimeout(()=>h.remove(),12000);
+}
+function burst(){for(let i=0;i<30;i++)setTimeout(heart,i*60)}
+setInterval(heart,900);
+build();
+</script>
+</body>
+</html>
